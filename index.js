@@ -87,7 +87,7 @@ if (message.content.startsWith(prefix + "sondage")) {
         .addField("_ _", "_ _")
         .addField("Règles", "Permet de publier des règles 'de bases', : =regles")
         .addField("_ _", "_ _")
-        addField("Sondage", "Permet de faire un sondage dans le channel `general` : =sondage [sondage]")
+        .addField("Sondage", "Permet de faire un sondage dans le channel `general` : =sondage [sondage]")
         .addField("_ _", "_ _")
         .setFooter("HelpBot | By Nσcн'#9400")
         .setColor("#ff0000")
