@@ -43,7 +43,7 @@ if (message.content.startsWith(prefix + "sondage")) {
         let args = message.content.split(" ").slice(1);
         let thingToEcho = args.join(" ")
         var embed1 = new Discord.RichEmbed()
-        .setDescription("Sondage")
+        .setTitle("Sondage")
         .addField(thingToEcho, "Répondre avec :white_check_mark: ou :x:")
         .setColor("0xB40404")
         .setTimestamp()
@@ -67,7 +67,9 @@ if (message.content.startsWith(prefix + "sondage")) {
         .addField("_ _", "_ _")
         .addField("Botinfo", "Voir les informations du bot : =botinfo")
         .addField("_ _", "_ _")
-        .setFooter("HelpBot | By Noch'")
+        .addField("Invitation", "Inviter le bot sur son propre serveur via la commande =invite")
+        .addField("_ _", "_ _")
+        .setFooter("HelpBot | Nσcн'#9400")
         .setColor("#00c7ff")
       
         message.author.sendMessage(embed2);
@@ -85,12 +87,28 @@ if (message.content.startsWith(prefix + "sondage")) {
         .addField("_ _", "_ _")
         .addField("Règles", "Permet de publier des règles 'de bases', : =regles")
         .addField("_ _", "_ _")
-        .setFooter("HelpBot | By Noch'")
+        addField("Sondage", "Permet de faire un sondage dans le channel `general` : =sondage [sondage]")
+        .addField("_ _", "_ _")
+        .setFooter("HelpBot | By Nσcн'#9400")
         .setColor("#ff0000")
         
         message.author.sendMessage(modembed);
     }
 }
+
+    if(message.content === prefix + "invite"){
+        var invbed = new Discord.RichEmbed()
+        .setTitle("Invite moi !👌")
+        .addField("_ _", "_ _")
+        .addField("⬇️ Clique dessous ⬇️", "_ _")
+        .addField("_ _", "_ _")
+        .addField("_ _", "**_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ [✅](https://discordapp.com/api/oauth2/authorize?client_id=442428607583748117&permissions=268643430&scope=bot)**")
+        .addField("_ _", "_ _")
+        .addField("⬇️Veuillez lire ce Google Doc pour le bon fonctionnement du bot.⬇️", "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ [📌](https://docs.google.com/document/d/18k3XueExGDpX8fYjaFWENwbck1YCFRcKi4wPF-OPo0w/edit#heading=h.84h9h64i8f1l)")
+        .setFooter("Helpbot | By Nσcн'#9400")
+        message.channel.send(invbed);
+
+    }
 
 
 
