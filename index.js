@@ -10,7 +10,7 @@ bot.on('ready', function() {
 
 });
 
-bot.login("NDQyNDI4NjA3NTgzNzQ4MTE3.DeScPQ.P96tluX_r4kq4e9echKAy_SCcf8");
+bot.login(process.env.TOKEN);
 
 
 bot.on('message', message => {
