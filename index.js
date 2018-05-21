@@ -107,6 +107,8 @@ if (message.content.startsWith(prefix + "sondage")) {
         .addField("⬇️Veuillez lire ce Google Doc pour le bon fonctionnement du bot.⬇️", "_ _")
         .addField("_ _", "_ _")
         .addField("_ _", "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ [📌](https://docs.google.com/document/d/18k3XueExGDpX8fYjaFWENwbck1YCFRcKi4wPF-OPo0w/edit#heading=h.84h9h64i8f1l)")
+        .addField("_ _", "_ _")
+        .setColor("#ffa100")
         .setFooter("Helpbot | By Nσcн'#9400")
         message.channel.send(invbed);
 
