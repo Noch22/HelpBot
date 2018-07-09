@@ -207,16 +207,17 @@ if (message.content.startsWith(prefix + "sondage")) {
       return;
     }
   
-    if(cmd === prefix + `botinfo`){
+        if(cmd === prefix + `botinfo`){
       let bicon = bot.user.displayAvatarURL;
       let botembed = new Discord.RichEmbed()
-      .setDescription("Bot Information")
+      .setTitle("Bot Information")
       .setColor("#15f153")
       .setThumbnail(bicon)
       .addField("Nom du bot", bot.user.username)
       .addField("Crée le", bot.user.createdAt)
+      .addField("Présent sur :", `${bot.guilds.size} serveurs`)
       .addField("Crée par", "Nσcн'#9400")
-      .addField("Sa chaîne YouTube", "[HERE](https://www.youtube.com/c/NochYoutube)");
+      .setFooter("Helpbot | By Nσcн'#9400");
   
       message.channel.send(botembed);
     }
