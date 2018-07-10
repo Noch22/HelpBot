@@ -1,30 +1,21 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
-
+ 
 var prefix = ("=");
 
 bot.on('ready', function() {
-    bot.user.setGame('HelpBot | =help')
+    bot.user.setGame('Nouvelles commandes ! => =help')
     console.log("Connected");
     
 
 });
 
+
 bot.login(process.env.TOKEN);
 
 
-bot.on('message', message => {
-  if (message.content === "Salut"){
-    message.reply("Bien le bonjour à toi");
-    console.log("Commande Reply bonjour effectué");
-}
-
-if (message.content === "salut"){
-    message.reply("Bien le bonjour à toi");
-    console.log("Commande Reply bonjour effectué");
-}
-
- if (message.content === prefix + "regles"){
+bot.on('message', message => { 
+    if (message.content === prefix + "regles"){
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("Tu ne peux pas faire ça malheureux !");
     var embed = new Discord.RichEmbed()
         .setTitle("⚠️ Règles ⚠️")
@@ -55,7 +46,7 @@ if (message.content.startsWith(prefix + "sondage")) {
     }).catch(function() {
     });
     }
-  
+    
   if(message.content === prefix + "help"){
         var embed2 = new Discord.RichEmbed()
         .setTitle("📌 Commandes 📌")
@@ -67,7 +58,13 @@ if (message.content.startsWith(prefix + "sondage")) {
         .addField("_ _", "_ _")
         .addField("Botinfo", "Voir les informations du bot : =botinfo")
         .addField("_ _", "_ _")
-        .addField("Invitation", "Inviter le bot sur son propre serveur via la commande =invite")
+        .addField("Serveur info", "Voir les informations du serveur avec : =serverinfo")
+        .addField("_ _", "_ _")
+        .addField("Invitation", "Inviter le bot sur son propre serveur via la commande : =invite")
+        .addField("_ _", "_ _")
+        .addField("8ball", "Pose moi une question, je t'y répondrai ;) =8ball [question]")
+        .addField("_ _", "_ _")
+        .addField("Créateur", "Voir les infos du créateur avec =createur")
         .addField("_ _", "_ _")
         .setFooter("HelpBot | Nσcн'#9400")
         .setColor("#00c7ff")
@@ -104,11 +101,7 @@ if (message.content.startsWith(prefix + "sondage")) {
         .addField("_ _", "_ _")
         .addField("_ _", "**_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ [✅](https://discordapp.com/api/oauth2/authorize?client_id=442428607583748117&permissions=268643430&scope=bot)**")
         .addField("_ _", "_ _")
-        .addField("⬇️Veuillez lire ce Google Doc pour le bon fonctionnement du bot.⬇️", "_ _")
-        .addField("_ _", "_ _")
-        .addField("_ _", "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ [📌](https://docs.google.com/document/d/18k3XueExGDpX8fYjaFWENwbck1YCFRcKi4wPF-OPo0w/edit#heading=h.84h9h64i8f1l)")
-        .addField("_ _", "_ _")
-        .setColor("#ffa100")
+        .addField("⬇️Veuillez lire ce Google Doc pour le bon fonctionnement du bot.⬇️", "**_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ [📌](https://docs.google.com/document/d/18k3XueExGDpX8fYjaFWENwbck1YCFRcKi4wPF-OPo0w/edit#heading=h.84h9h64i8f1l)**")
         .setFooter("Helpbot | By Nσcн'#9400")
         message.channel.send(invbed);
 
@@ -169,7 +162,7 @@ if (message.content.startsWith(prefix + "sondage")) {
       .addField("Banni Pour", bReason);
   
       let incidentchannel = message.guild.channels.find(`name`, "incidents");
-      if(!incidentchannel) return message.channel.send("Impossible de trouver le salon");
+      if(!incidentchannel) return message.channel.send("Je ne peux pas trouver le channel reports");
   
       message.guild.member(bUser).ban(bReason);
       incidentchannel.send(banEmbed);
@@ -198,7 +191,7 @@ if (message.content.startsWith(prefix + "sondage")) {
       .addField("Pour", rreason);
   
       let reportschannel = message.guild.channels.find(`name`, "reports");
-      if(!reportschannel) return message.channel.send("Couldn't find reports channel.");
+      if(!reportschannel) return message.channel.send("Je ne peux pas trouver le channel reports");
   
   
       message.delete().catch(O_o=>{});
@@ -207,7 +200,7 @@ if (message.content.startsWith(prefix + "sondage")) {
       return;
     }
   
-        if(cmd === prefix + `botinfo`){
+    if(cmd === prefix + `botinfo`){
       let bicon = bot.user.displayAvatarURL;
       let botembed = new Discord.RichEmbed()
       .setTitle("Bot Information")
@@ -222,4 +215,49 @@ if (message.content.startsWith(prefix + "sondage")) {
       message.channel.send(botembed);
     }
 
+    if(cmd === prefix +"serverinfo"){
+        let servicon = message.guild.iconURL
+        let serembed = new Discord.RichEmbed()
+        .setTitle("Serveur Informations")
+        .setColor("#15f153")
+        .setThumbnail(servicon)
+        .addField("Nom du serveur", `${message.guild.name} (${message.guild.nameAcronym})`, true)
+        .addField("Propriétaire du serveur", message.guild.owner.user.tag, true)
+        .addField("Membres", message.guild.memberCount)
+        .addField("Nom du salon AFK", message.guild.afkChannel)
+        .setFooter("Helpbot | By Nσcн'#9400");
+    message.channel.send(serembed);
+    }
+
+    if (message.content.startsWith(prefix + "8ball")) {
+        let args = message.content.split(" ").slice(1);
+        let thingToEcho = args.join(" ")
+        if(!args[1]) return message.channel.send("Pose moi une vrai question ;)")
+        message.delete(10);
+        let reponses = ["Oui", "Non", "Peut-être", "Je n'en sais rien !", "Alors là ! tu me pose une colle ! ;)", "Je ne dirais rien :smirk:", "Ah ! je l'ai sur le bout de la langue !"];
+        let result = Math.floor(Math.random() * reponses.length)    
+        var embed1 = new Discord.RichEmbed()
+            .setTitle(":8ball: 8Ball ! :8ball:")
+            .addField("Ta question :", thingToEcho, true)
+            .addField("Ma réponse :", reponses[result], true)
+            .setColor("#c2f204")
+            .setFooter("Helpbot | By Nσcн'#9400")
+            .setTimestamp();
+        message.channel.sendEmbed(embed1).catch(function() {
+        });
+        }
+
+       if(message.content.startsWith(prefix + "createur")) {
+           var crem = new Discord.RichEmbed()
+           .setTitle(":robot: Créateur :robot:")
+           .addField("_ _", "_ _")
+           .addField("Créer par ", "Noch'")
+           .addField("_ _", "_ _")
+           .addField("Ses résaux sociaux", "_ _")
+           .addField("Discord", "Nσcн'#9400")
+           .addField("YouTube", "**_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ [✅](https://www.youtube.com/c/NochYoutube)**")
+           .setFooter("Helpbot | By Nσcн'#9400");
+
+           message.channel.send(crem);
+       }
 });
