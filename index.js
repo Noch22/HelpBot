@@ -4,7 +4,7 @@ const bot = new Discord.Client();
 var prefix = ("=");
 
 bot.on('ready', function() {
-    bot.user.setGame('Nouvelles commandes ! => =help')
+    bot.user.setGame('HelpBot | =help')
     console.log("Connected");
     
 
